@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "built4you",
+  "compatibility_date": "2026-10-01",
+  // Assets only. Don't deploy until the hub is styled.
+  "assets": {
+    "directory": "./out",
+    "not_found_handling": "404-page"
+  },
+  "routes": [{ "pattern": "built4you.jasperntc.dev", "custom_domain": true }]
+}
