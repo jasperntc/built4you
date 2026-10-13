@@ -36,10 +36,10 @@ CI runs audit, lint, typecheck, test and build on every PR. Run all of them befo
 ## Episode data
 
 - Episodes live in `content/episodes.ts`, typed against `Episode`. Change the type only with my approval.
-- Fields: `number`, `title`, `slug`, `status` (`planned` | `building` | `live`), `description` (one line), `link`, and optional `credit`.
+- Fields: `number`, `title`, `slug`, `status` (`idea` | `picked` | `building` | `shipped`), `description` (one line), `link`, and optional `credit`.
 - `slug` is a stable URL path segment: lowercase letters, digits and hyphens. Never rename one. Episode numbers are unique and sequential from 1.
 - `link` is `/<slug>` for hub-mounted episodes or `https://<slug>.jasperntc.online` for login apps. Nothing else.
-- Only `live` episodes render their link as clickable. `planned` and `building` show their status instead.
+- Only `shipped` episodes render their link as clickable. `idea`, `picked` and `building` show their status instead.
 - `credit` is `{ name: string; agreedOn: string }` (`YYYY-MM-DD`, not in the future). Set it only after the idea-giver has agreed to be credited, and only I add it. Never infer a name from notes, commits or other repos.
 - With no `credit`, the page shows no idea-giver name at all. Don't write `credit: undefined`. Leave the key out.
 - Tests enforce these rules. Never weaken a test to make data pass.
@@ -51,12 +51,14 @@ CI runs audit, lint, typecheck, test and build on every PR. Run all of them befo
 - Keep "makan mana" out of all copy. An existing app uses that name.
 - Wheel spins are real and never rigged. Don't write copy that implies otherwise.
 
-## Look
+## Brand
 
-- Playful, matching my Instagram stories: sky blue, yellow and sticky notes. It must not look like the portfolio.
-- Colours are CSS custom properties in `app/globals.css`. No one-off hex values in components.
-- Body text meets WCAG AA (4.5:1). Yellow is a surface colour (sticky notes, highlights), never text on sky blue.
-- Respect `prefers-reduced-motion`: no tilt or wobble animation when it's set.
+- docs/brand.md and docs/brand-logos.md are the rules for colour, type, logo and copy. They win over any skill's defaults.
+- Use only the CSS variables in app/brand-tokens.css. No raw hex values in components.
+- Use the frontend-design skill for layout, hierarchy, copy and motion decisions inside those rules.
+- Spacing uses only the steps in app/brand-tokens.css (1, 2, 3, 4, 6, 8, 12, 16).
+- Stamps are the only rotated element (−4°, Shipped −7°); nothing else tilts.
+- It must not look like the portfolio.
 - Works at phone width first. Most visitors come from an Instagram story.
 
 ## Storage
