@@ -1,1 +1,42 @@
+@import "./brand-tokens.css";
 @import "tailwindcss";
+
+/* Tailwind names for the brand tokens. Values live in brand-tokens.css only. */
+@theme inline {
+  /* No default palette: only brand colours exist. */
+  --color-*: initial;
+  --color-surface-kraft: var(--surface-kraft);
+  --color-surface-label: var(--surface-label);
+  --color-label-edge: var(--label-edge);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-stamp: var(--stamp);
+  --color-on-stamp: var(--on-stamp);
+  --color-stamp-green: var(--stamp-green);
+  --color-focus: var(--focus);
+  --color-wheel-tomato: var(--wheel-tomato);
+  --color-wheel-marigold: var(--wheel-marigold);
+  --color-wheel-leaf: var(--wheel-leaf);
+  --color-wheel-sea: var(--wheel-sea);
+  --color-wheel-denim: var(--wheel-denim);
+  --color-wheel-rose: var(--wheel-rose);
+  --color-wheel-plum: var(--wheel-plum);
+  --color-on-wheel-dark: var(--on-wheel-dark);
+  --color-on-wheel-light: var(--on-wheel-light);
+  --color-wheel-rim: var(--wheel-rim);
+
+  /* Same names as the brand tokens. The brand's unlayered :root wins over
+     Tailwind's theme layer, so these resolve to the brand values. */
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
+  --font-hand: var(--font-hand);
+  --radius-xs: var(--radius-xs);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-pill: var(--radius-pill);
+  --shadow-label: var(--shadow-label);
+  --shadow-press: var(--shadow-press);
+
+  /* p-4 = --space-4, and so on. */
+  --spacing: var(--space-1);
+}
