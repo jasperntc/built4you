@@ -57,6 +57,7 @@ CI runs audit, lint, typecheck, test and build on every PR. Run all of them befo
 - Use only the CSS variables in app/brand-tokens.css. No raw hex values in components.
 - Use the frontend-design skill for layout, hierarchy, copy and motion decisions inside those rules.
 - Spacing uses only the steps in app/brand-tokens.css (1, 2, 3, 4, 6, 8, 12, 16).
+- Type sizes (`text-display-xl`, `text-display`, `text-title`, `text-stamp-text`, `text-body`, `text-body-sm`, `text-button`, `text-hand`) are defined in `app/globals.css` from the design system's values, until the token export includes them. Use only these roles.
 - Stamps are the only rotated element (−4°, Shipped −7°); nothing else tilts.
 - It must not look like the portfolio.
 - Works at phone width first. Most visitors come from an Instagram story.

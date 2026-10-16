@@ -51,6 +51,14 @@ describe("episodes", () => {
     }
   });
 
+  it("keep the To: line short enough for one handwritten line", () => {
+    // brand.md: the hand line is "one line, never a paragraph". 32 characters
+    // fits a label at 375px in Caveat.
+    for (const e of episodes) {
+      expect(e.to.length, `${e.slug}: "${e.to}"`).toBeLessThanOrEqual(32);
+    }
+  });
+
   it("have a link exactly when shipped", () => {
     for (const e of episodes) {
       expect("link" in e, e.slug).toBe(e.stage === "shipped");

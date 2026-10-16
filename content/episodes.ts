@@ -6,8 +6,8 @@ export const episodes: Episode[] = [
     title: "Lapar Wheel",
     slug: "lapar-wheel",
     stage: "building",
-    to: "the friend who can't decide",
+    to: "the friend who can’t decide",
     description:
-      "My friend couldn't decide where to eat, so I'm building a wheel that decides.",
+      "My friend couldn’t decide where to eat, so I’m building a wheel that decides.",
   },
 ];

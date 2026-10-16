@@ -2,11 +2,17 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <main>
-      <h1>This page doesn&apos;t exist.</h1>
-      <p>
-        <Link href="/">Back to Built4You</Link>
-      </p>
+    <main id="main" className="mx-auto max-w-6xl px-4 pt-12 pb-16 md:px-6 md:pt-16">
+      <h1 className="condensed text-display text-balance">This page doesn’t exist.</h1>
+      <div className="mt-6 max-w-prose rounded-sm border border-label-edge bg-surface-label p-4 shadow-label md:p-6">
+        <p>
+          Check the address, or go back to the{" "}
+          <Link href="/" className="text-stamp underline underline-offset-4 hover:decoration-2">
+            <span translate="no">Built4You</span> home page
+          </Link>
+          .
+        </p>
+      </div>
     </main>
   );
 }
