@@ -29,9 +29,11 @@ The series hub for Built4You, an Instagram build-in-public series: friends send 
 | `npm test` | Vitest, including the data checks |
 | `npm run build` | Static export to `out/`, then the build guard (`tests/postbuild/`): fails if `out/` holds env files, keys, dumps, git data, backups, logs, or a private or live secret key |
 | `npm run preview` | Build, then serve `out/` with Wrangler at http://localhost:8787 |
-| `npm run deploy` | Build, then deploy. Only with my approval. |
+| `npm run deploy` | Build, then deploy by hand. Only with my approval. CI normally does this. |
 
 CI runs audit, lint, typecheck, test and build on every PR. Run all of them before saying a PR is ready.
+
+A merge to `main` deploys: once the checks pass, the `deploy` job in `.github/workflows/check.yml` runs `npm run deploy` with the `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` secrets from the `production` environment. Merging is deploying, so it needs my approval like any deploy.
 
 ## Episode data
 
