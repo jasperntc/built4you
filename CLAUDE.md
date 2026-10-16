@@ -36,12 +36,12 @@ CI runs audit, lint, typecheck, test and build on every PR. Run all of them befo
 ## Episode data
 
 - Episodes live in `content/episodes.ts`, typed against `Episode`. Change the type only with my approval.
-- Fields: `number`, `title`, `slug`, `status` (`idea` | `picked` | `building` | `shipped`), `description` (one line), `link`, and optional `credit`.
+- Fields: `number`, `title`, `slug`, `stage` (`idea` | `picked` | `building` | `shipped`), `to`, `description` (one line), optional `link`, and optional `credit`.
 - `slug` is a stable URL path segment: lowercase letters, digits and hyphens. Never rename one. Episode numbers are unique and sequential from 1.
-- `link` is `/<slug>` for hub-mounted episodes or `https://<slug>.jasperntc.online` for login apps. Nothing else.
-- Only `shipped` episodes render their link as clickable. `idea`, `picked` and `building` show their status instead.
+- `to` names who the app is for without naming them, for the To: line: "the friend who can't decide".
+- `link` is present only when `stage` is `shipped`, and is `/<slug>` for hub-mounted episodes or `https://<slug>.jasperntc.online` for login apps. Nothing else. Other stages show their stage instead.
 - `credit` is `{ name: string; agreedOn: string }` (`YYYY-MM-DD`, not in the future). Set it only after the idea-giver has agreed to be credited, and only I add it. Never infer a name from notes, commits or other repos.
-- With no `credit`, the page shows no idea-giver name at all. Don't write `credit: undefined`. Leave the key out.
+- With no `credit`, the page shows no idea-giver name at all. Don't write `credit: undefined` or `link: undefined`. Leave the key out.
 - Tests enforce these rules. Never weaken a test to make data pass.
 
 ## Copy
