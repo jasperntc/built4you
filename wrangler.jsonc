@@ -2,7 +2,7 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "built4you",
   "compatibility_date": "2026-10-01",
-  // Assets only. Don't deploy until the hub is styled.
+  // Assets only. CI deploys this on every merge to main.
   "assets": {
     "directory": "./out",
     "not_found_handling": "404-page"

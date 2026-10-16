@@ -5,6 +5,9 @@ on:
   push:
     branches: [main]
 
+permissions:
+  contents: read
+
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -22,3 +25,30 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
+
+  # A merge to main deploys the hub, once every check above has passed.
+  # Pull requests never deploy.
+  deploy:
+    needs: check
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    # Holds the Cloudflare secrets. Add required reviewers to this
+    # environment in the repo settings to approve each deploy by hand.
+    environment: production
+    # One deploy at a time, in merge order. A newer merge waits; it never
+    # cancels a deploy that's already running.
+    concurrency:
+      group: deploy-production
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      # Builds out/, then deploys it with the Wrangler pinned in package-lock.json.
+      - run: npm run deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
