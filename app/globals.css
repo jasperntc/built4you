@@ -67,6 +67,84 @@
   --text-hand--font-weight: 700;
 }
 
+/* Kraft grain: two fixed layers between the kraft background and the page.
+   Each is a token fill seen through a noise mask: ink-soft for fibres,
+   surface-label for flecks. Labels are opaque, so the grain only shows on
+   bare kraft. Fixed and static: it never repaints on scroll. Opacity is the
+   most any pixel moves towards the token, which the contrast check uses. */
+:root {
+  --grain-fibre: 0.06;
+  --grain-fleck: 0.05;
+  --grain-fibre-mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='f'><feTurbulence type='fractalNoise' baseFrequency='0.08 0.9' numOctaves='2' seed='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 0 0 0 -1.2'/></filter><rect width='240' height='240' filter='url(%23f)'/></svg>");
+  --grain-fleck-mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='f'><feTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='1' seed='8' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 8 0 0 0 -5'/></filter><rect width='240' height='240' filter='url(%23f)'/></svg>");
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --grain-fibre: 0.02;
+    --grain-fleck: 0.03;
+  }
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  -webkit-mask-size: 240px;
+  mask-size: 240px;
+  -webkit-mask-repeat: repeat;
+  mask-repeat: repeat;
+}
+
+body::before {
+  background-color: var(--ink-soft);
+  opacity: var(--grain-fibre);
+  -webkit-mask-image: var(--grain-fibre-mask);
+  mask-image: var(--grain-fibre-mask);
+}
+
+body::after {
+  background-color: var(--surface-label);
+  opacity: var(--grain-fleck);
+  -webkit-mask-image: var(--grain-fleck-mask);
+  mask-image: var(--grain-fleck-mask);
+}
+
+/* Translucent masking tape over the featured label's top edge, with torn
+   ends. Tinted from label-edge so it reads as beige tape in light mode and
+   dark tape in dark mode. */
+.tape {
+  background-color: color-mix(in srgb, var(--label-edge) 55%, transparent);
+  /* Serrated ends, 0-4px deep every 10%, like tape torn off the roll. */
+  clip-path: polygon(
+    calc(100% - 1px) 0,
+    calc(100% - 4px) 10%,
+    100% 20%,
+    calc(100% - 3px) 30%,
+    calc(100% - 1px) 40%,
+    calc(100% - 4px) 50%,
+    calc(100% - 2px) 60%,
+    100% 70%,
+    calc(100% - 3px) 80%,
+    calc(100% - 1px) 90%,
+    calc(100% - 4px) 100%,
+    0 100%,
+    3px 90%,
+    1px 80%,
+    4px 70%,
+    2px 60%,
+    0 50%,
+    4px 40%,
+    1px 30%,
+    3px 20%,
+    0 10%,
+    2px 0
+  );
+}
+
 /* Taps: no double-tap zoom delay, and a faint stamp tint instead of the
    browser's grey flash. */
 html {

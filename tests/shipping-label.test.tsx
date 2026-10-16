@@ -45,4 +45,14 @@ describe("ShippingLabel", () => {
   it("shows the episode number in words", () => {
     expect(render(building)).toContain("Episode 3");
   });
+
+  it("tapes on and enlarges only the featured label", () => {
+    const featured = renderToStaticMarkup(<ShippingLabel episode={building} featured />);
+    expect(featured).toMatch(/<span aria-hidden="true" class="tape /);
+    expect(featured).toContain("lg:text-display");
+
+    const plain = render(building);
+    expect(plain).not.toContain("tape");
+    expect(plain).not.toContain("lg:text-display");
+  });
 });
