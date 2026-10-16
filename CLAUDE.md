@@ -27,7 +27,7 @@ The series hub for Built4You, an Instagram build-in-public series: friends send 
 | `npm run lint` | ESLint |
 | `npm run typecheck` | `next typegen`, then `tsc --noEmit` |
 | `npm test` | Vitest, including the data checks |
-| `npm run build` | Static export to `out/` |
+| `npm run build` | Static export to `out/`, then the build guard (`tests/postbuild/`): fails if `out/` holds env files, keys, dumps, git data, backups, logs, or a private or live secret key |
 | `npm run preview` | Build, then serve `out/` with Wrangler at http://localhost:8787 |
 | `npm run deploy` | Build, then deploy. Only with my approval. |
 
